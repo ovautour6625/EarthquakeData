@@ -6,7 +6,9 @@
  */
 package cais220project;
 
+import java.util.List;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -22,22 +24,17 @@ public class CAIS220Project extends Application {
   
   @Override
   public void start(Stage primaryStage) {
-    Button btn = new Button();
-    btn.setText("Say 'Hello World'");
-    btn.setOnAction(new EventHandler<ActionEvent>() {
-      
-      @Override
-      public void handle(ActionEvent event) {
-        System.out.println("Hello World!");
-      }
-    });
     
-    StackPane root = new StackPane();
-    root.getChildren().add(btn);
+    EarthQuakeDataFactory factory = new FakeEarthQuakeDataFactory();
+    List<EarthQuakeData> data = factory.getData();
     
-    Scene scene = new Scene(root, 300, 250);
+    EarthQuakeTableView tableView = new EarthQuakeTableView(
+            FXCollections.observableArrayList(data)
+    );
     
-    primaryStage.setTitle("Hello World!");
+    Scene scene = new Scene(tableView, 500, 250);
+    
+    primaryStage.setTitle("USGS Earthquake Data");
     primaryStage.setScene(scene);
     primaryStage.show();
   }
