@@ -35,19 +35,19 @@ public class EarthQuakeTableView extends TableView<EarthQuakeData> {
 
   private void setColumns() {
     TableColumn locationColumn = new TableColumn("Location");
-    locationColumn.setMinWidth(50);
+    locationColumn.setMaxWidth(200);
     locationColumn.setCellValueFactory(
       new PropertyValueFactory<EarthQuakeData, 
               String>("location"));
 
     TableColumn magnitudeColumn = 
       new TableColumn("Magnitude");
-    magnitudeColumn.setMinWidth(10);
+    magnitudeColumn.setMaxWidth(75);
     magnitudeColumn.setCellValueFactory(
       new PropertyValueFactory<EarthQuakeData, Double>("magnitude"));
 
     TableColumn quakeTimeColumn = new TableColumn("Earthquake time");
-    quakeTimeColumn.setMinWidth(50);
+    quakeTimeColumn.setMinWidth(25);
     //quakeTimeColumn.setCellValueFactory(new PropertyValueFactory<EarthquakeData, 
     //          String>("quakeTime"));
     quakeTimeColumn.setCellValueFactory(
@@ -65,18 +65,18 @@ public class EarthQuakeTableView extends TableView<EarthQuakeData> {
     });
     
     TableColumn longColumn = new TableColumn("Longitude");
-    longColumn.setMinWidth(10);
+    longColumn.setMinWidth(5);
     longColumn.setCellValueFactory(
             new PropertyValueFactory<EarthQuakeData,Double>("longitude"));
     
       TableColumn latColumn = new TableColumn("Latitude");
-    latColumn.setMinWidth(10);
+    latColumn.setMinWidth(5);
     latColumn.setCellValueFactory(
             new PropertyValueFactory<EarthQuakeData, Double>("latitude"));
     
     
       TableColumn depthColumn = new TableColumn("Depth");
-    depthColumn.setMinWidth(20);
+    depthColumn.setMinWidth(10);
     depthColumn.setCellValueFactory(
             new PropertyValueFactory<EarthQuakeData, Double>("depth"));
     

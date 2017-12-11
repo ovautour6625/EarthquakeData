@@ -46,6 +46,16 @@ public class EarthQuakeData {
         this.depth = new SimpleDoubleProperty(depth);
     }
     
+     public EarthQuakeData(String location, 
+            Date quakeTime,
+            double magnitude) {
+        this.location = new SimpleStringProperty(location);
+        this.quakeTime = new SimpleObjectProperty<Date>(quakeTime);
+        this.magnitude = new SimpleDoubleProperty(magnitude);
+        this.longitude = new SimpleDoubleProperty(6.0);
+        this.latitude = new SimpleDoubleProperty(5.0);
+        this.depth =  new SimpleDoubleProperty(4.0);
+     }
     
     public String getLocation() {
         return location.get();
