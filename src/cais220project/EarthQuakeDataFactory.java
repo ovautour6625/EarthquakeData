@@ -14,4 +14,6 @@ import java.util.List;
 public abstract class EarthQuakeDataFactory {
     
     public abstract List<EarthQuakeData> getData();
+
+   
 }

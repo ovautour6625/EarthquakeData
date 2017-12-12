@@ -29,19 +29,18 @@ import org.geojson.Point;
  *
  * @author Owen
  */
-public class GeoJSONEarthQuakeDataFactory extends EarthQuakeDataFactory{
+public class GeoJSONEarthQuakeDataFactory {
 
     static private final String LOCATION_KEY = "place";
     static private final String MAGNITUDE_KEY = "mag";
     static private final String QUAKETIME_KEY= "time";
-    
-    
-    @Override
+    public static String link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+   
     public List<EarthQuakeData> getData() {
        
         try{
             
-            URL url = new URL("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson");
+            URL url = new URL(link);
             ArrayList<EarthQuakeData> list = null;
             try(
                     InputStream in = url.openStream();
@@ -87,10 +86,14 @@ public class GeoJSONEarthQuakeDataFactory extends EarthQuakeDataFactory{
         return null;
     } 
     public static void main(String[] args) {
-        EarthQuakeDataFactory factory = new GeoJSONEarthQuakeDataFactory();
+        GeoJSONEarthQuakeDataFactory factory = new GeoJSONEarthQuakeDataFactory();
         List<EarthQuakeData> list = factory.getData();
         list.forEach((earthquakeData) -> 
                 System.out.println(earthquakeData.toString()));
     }
+    
+   public static void changeURL(String newLink){
+       link = newLink;
+   }
     
 }

@@ -48,8 +48,6 @@ public class EarthQuakeTableView extends TableView<EarthQuakeData> {
 
     TableColumn quakeTimeColumn = new TableColumn("Earthquake time");
     quakeTimeColumn.setMinWidth(25);
-    //quakeTimeColumn.setCellValueFactory(new PropertyValueFactory<EarthquakeData, 
-    //          String>("quakeTime"));
     quakeTimeColumn.setCellValueFactory(
       new Callback<CellDataFeatures<EarthQuakeData, String>, 
               ObservableValue<String>>() {

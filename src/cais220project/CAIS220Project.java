@@ -1,8 +1,8 @@
 /*
  * Westfield State University: CAIS 220: Program Design II
- * @author Ruth Kurniawati (rkurniawati@westfield.ma.edu) 
+ * @author Owen Vautour   (ovautour6625@westfield.ma.edu)
  * (c) 2017
- * Created: Sep 20, 2017 9:23:05 AM 
+ * Created: Oct 3, 2017 10:34:05 PM 
  */
 package cais220project;
 
@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Ruth Kurniawati (rkurniawati@westfield.ma.edu)
+ * @author Owen Vautour  (ovautour6625@westfield.ma.edu)
  */
 public class CAIS220Project extends Application {
   
@@ -66,7 +66,7 @@ public class CAIS220Project extends Application {
         grid.add(show, 0 , 4);
         
 
-        EarthQuakeDataFactory factory = new GeoJSONEarthQuakeDataFactory();
+        GeoJSONEarthQuakeDataFactory factory = new GeoJSONEarthQuakeDataFactory();
         List<EarthQuakeData> data = factory.getData();
 
         EarthQuakeTableView tableView = new EarthQuakeTableView(
@@ -79,6 +79,35 @@ public class CAIS220Project extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
  
+        show.setOnAction((event)->{
+            String m = magbox.getValue().toString();
+            String w = whenbox.getValue().toString();
+         
+            
+            if(m.matches("4.5 and above")){
+                m = "4.5";}
+            else if(m.matches("2.5 and above")){
+                m = "2.5";}
+            else if(m.matches("1.0 and above")){
+                m = "1.0";}
+            else if(m.matches("Show All")){
+                m = "all";}
+            if(w.matches("Past 30 Days")){
+                w = "month";}
+            else if(w.matches("Past Week")){
+                w = "week";}
+            else if(w.matches("Past Day")){
+                w = "day"; }
+           
+          
+            factory.changeURL(
+                    "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/" + m + "_" + w + ".geojson");
+            List<EarthQuakeData> newData = factory.getData();
+            EarthQuakeTableView newTableView = new EarthQuakeTableView(
+                FXCollections.observableArrayList(newData));
+            borderpane.setCenter(newTableView);
+        });
+        
   }
   
   
