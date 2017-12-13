@@ -13,6 +13,10 @@ import java.util.List;
  */
 public abstract class EarthQuakeDataFactory {
     
+    /**
+     *
+     * @return
+     */
     public abstract List<EarthQuakeData> getData();
 
    

@@ -19,16 +19,22 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 /**
- *
  * @author Owen
  */
 public class EarthQuakeTableView extends TableView<EarthQuakeData> {
  
+    /**
+     *
+     */
     public EarthQuakeTableView() {
     setColumns();
   }
 
-  public EarthQuakeTableView(ObservableList<EarthQuakeData> items) {
+    /**
+     *
+     * @param items
+     */
+    public EarthQuakeTableView(ObservableList<EarthQuakeData> items) {
     super(items);
     setColumns();
   }
@@ -46,7 +52,7 @@ public class EarthQuakeTableView extends TableView<EarthQuakeData> {
     magnitudeColumn.setCellValueFactory(
       new PropertyValueFactory<EarthQuakeData, Double>("magnitude"));
 
-    TableColumn quakeTimeColumn = new TableColumn("Earthquake time");
+    TableColumn quakeTimeColumn = new TableColumn("Earthquake Date");
     quakeTimeColumn.setMinWidth(25);
     quakeTimeColumn.setCellValueFactory(
       new Callback<CellDataFeatures<EarthQuakeData, String>, 

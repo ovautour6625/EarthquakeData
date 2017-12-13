@@ -66,7 +66,7 @@ public class CAIS220Project extends Application {
         grid.add(show, 0 , 4);
         
 
-        GeoJSONEarthQuakeDataFactory factory = new GeoJSONEarthQuakeDataFactory();
+        EarthQuakeDataFactory factory = new GeoJSONEarthQuakeDataFactory();
         List<EarthQuakeData> data = factory.getData();
 
         EarthQuakeTableView tableView = new EarthQuakeTableView(
@@ -79,11 +79,14 @@ public class CAIS220Project extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
  
+        /**
+         * Event handler for Show button changes the URL 
+         * depending on what was chosen in the comboboxes
+         */
         show.setOnAction((event)->{
             String m = magbox.getValue().toString();
             String w = whenbox.getValue().toString();
          
-            
             if(m.matches("4.5 and above")){
                 m = "4.5";}
             else if(m.matches("2.5 and above")){
@@ -98,11 +101,13 @@ public class CAIS220Project extends Application {
                 w = "week";}
             else if(w.matches("Past Day")){
                 w = "day"; }
+            
+            EarthQuakeDataFactory newFactory = 
+                    new GeoJSONEarthQuakeDataFactory("https://earthquake.usgs.gov/"
+                    + "earthquakes/feed/v1.0/summary/"
+                    + m + "_" + w + ".geojson");
            
-          
-            factory.changeURL(
-                    "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/" + m + "_" + w + ".geojson");
-            List<EarthQuakeData> newData = factory.getData();
+            List<EarthQuakeData> newData = newFactory.getData();
             EarthQuakeTableView newTableView = new EarthQuakeTableView(
                 FXCollections.observableArrayList(newData));
             borderpane.setCenter(newTableView);

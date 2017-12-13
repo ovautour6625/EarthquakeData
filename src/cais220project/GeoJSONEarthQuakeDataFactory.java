@@ -26,25 +26,41 @@ import org.geojson.LngLatAlt;
 import org.geojson.Point;
 
 /**
- *
+ * Factory that parses GeoJSON file from USGS
  * @author Owen
  */
-public class GeoJSONEarthQuakeDataFactory {
+public class GeoJSONEarthQuakeDataFactory extends EarthQuakeDataFactory{
 
     static private final String LOCATION_KEY = "place";
     static private final String MAGNITUDE_KEY = "mag";
     static private final String QUAKETIME_KEY= "time";
-    public static String link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+    
+    String link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
    
+    /**
+     *
+     */
+    public GeoJSONEarthQuakeDataFactory(){
+        
+    }
+    
+    /**
+     *
+     * @param link
+     */
+    public GeoJSONEarthQuakeDataFactory(String link){
+        this.link = link;
+    }
+    
+    /**
+     * Parses GeoJSON file into ArrayList
+     * @return List<EarthQuakeData>
+     */
     public List<EarthQuakeData> getData() {
-       
-        try{
-            
+        try{ 
             URL url = new URL(link);
             ArrayList<EarthQuakeData> list = null;
-            try(
-                    InputStream in = url.openStream();
-                    )
+            try(InputStream in = url.openStream();)
             {
                 FeatureCollection featureCollection =
                         new ObjectMapper().readValue(in, FeatureCollection.class);
@@ -59,17 +75,17 @@ public class GeoJSONEarthQuakeDataFactory {
                         continue;
                     }
                     
-                    Point point = (Point) f.getGeometry();
-                    LngLatAlt lla = point.getCoordinates();
-                    double longitude = lla.getLongitude();
-                    double latitude = lla.getLatitude();
-                    double depth = lla.getAltitude();
-                    
-                    EarthQuakeData data = new EarthQuakeData(location,
-                            new Date(epochQuakeTime), magnitude.doubleValue(), 
-                            latitude, longitude, depth);
-                    
-                    list.add(data);
+                Point point = (Point) f.getGeometry();
+                LngLatAlt lla = point.getCoordinates();
+                double longitude = lla.getLongitude();
+                double latitude = lla.getLatitude();
+                double depth = lla.getAltitude();
+
+                EarthQuakeData data = new EarthQuakeData(location,
+                        new Date(epochQuakeTime), magnitude.doubleValue(), 
+                        latitude, longitude, depth);
+
+                list.add(data);
                 }
             }
             catch (FileNotFoundException ex) {
@@ -85,15 +101,8 @@ public class GeoJSONEarthQuakeDataFactory {
         }
         return null;
     } 
-    public static void main(String[] args) {
-        GeoJSONEarthQuakeDataFactory factory = new GeoJSONEarthQuakeDataFactory();
-        List<EarthQuakeData> list = factory.getData();
-        list.forEach((earthquakeData) -> 
-                System.out.println(earthquakeData.toString()));
-    }
+
     
-   public static void changeURL(String newLink){
-       link = newLink;
-   }
+   
     
 }

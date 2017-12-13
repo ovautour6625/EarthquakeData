@@ -14,14 +14,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- *
+ * Each EarthQuakeData object models the information 
+ * for a single earthquake
  * @author Owen
  */
 public class EarthQuakeData {
- private final StringProperty location;
+    private final StringProperty location;
     private final ObjectProperty<Date> quakeTime;
     private final DoubleProperty magnitude;
-   private final DoubleProperty longitude;
+    private final DoubleProperty longitude;
     private final DoubleProperty latitude;
     private final DoubleProperty depth;
     
@@ -58,33 +59,15 @@ public class EarthQuakeData {
         this.depth = new SimpleDoubleProperty(depth);
     }
     
-    /**
-     *
-     * @param location
-     * @param quakeTime
-     * @param magnitude
-     */
-    public EarthQuakeData(String location, 
-            Date quakeTime,
-            double magnitude) {
-        this.location = new SimpleStringProperty(location);
-        this.quakeTime = new SimpleObjectProperty<Date>(quakeTime);
-        this.magnitude = new SimpleDoubleProperty(magnitude);
-        this.longitude = new SimpleDoubleProperty(6.0);
-        this.latitude = new SimpleDoubleProperty(5.0);
-        this.depth =  new SimpleDoubleProperty(4.0);
-     }
     
     /**
-     *
-     * @return
+     * @return location
      */
     public String getLocation() {
         return location.get();
     }
 
     /**
-     *
      * @param value
      */
     public void setLocation(String value) {
@@ -92,23 +75,20 @@ public class EarthQuakeData {
     }
 
     /**
-     *
-     * @return
+     * @return locationProperty
      */
     public StringProperty locationProperty() {
         return location;
     }
     
     /**
-     *
-     * @return
+     * @return magnitude
      */
     public double getMagnitude() {
         return magnitude.get();
     }
 
     /**
-     *
      * @param value
      */
     public void setMagnitude(double value) {
@@ -116,23 +96,20 @@ public class EarthQuakeData {
     }
 
     /**
-     *
-     * @return
+     * @return magnitudeProperty
      */
     public DoubleProperty magnitudeProperty() {
         return magnitude;
     }
    
     /**
-     *
-     * @return
+     * @return quakeTime
      */
     public Date getQuakeTime() {
         return quakeTime.get();
     }
 
     /**
-     *
      * @param value
      */
     public void setQuakeTime(Date value) {
@@ -140,23 +117,20 @@ public class EarthQuakeData {
     }
 
     /**
-     *
-     * @return
+     * @return quakeTimeProperty
      */
     public ObjectProperty<Date> quakeTimeProperty() {
         return quakeTime;
     }
 
     /**
-     *
-     * @return
+     * @return longitude
      */
     public double getLongitude(){
         return longitude.get();
     }
     
     /**
-     *
      * @param value
      */
     public void setLongitude(double value){
@@ -164,23 +138,20 @@ public class EarthQuakeData {
     }
     
     /**
-     *
-     * @return
+     * @return longitudeProperty
      */
     public DoubleProperty longitudeProperty(){
         return longitude;
     }
     
     /**
-     *
-     * @return
+     * @return latitude
      */
     public double getLatitude(){
         return latitude.get();
     }
     
     /**
-     *
      * @param value
      */
     public void latitude(double value){
@@ -188,23 +159,20 @@ public class EarthQuakeData {
     }
     
     /**
-     *
-     * @return
+     * @return latitudeProperty
      */
     public DoubleProperty latitudeProperty(){
         return latitude;
     }
     
     /**
-     *
-     * @return
+     * @return depth
      */
     public double getDepth(){
         return depth.get();
     }
     
     /**
-     *
      * @param value
      */
     public void setDepth(double value){
@@ -212,16 +180,14 @@ public class EarthQuakeData {
     }
     
     /**
-     *
-     * @return
+     * @return depthProperty
      */
     public DoubleProperty depthProperty(){
         return depth;
     }
 
     /**
-     *
-     * @return
+     * @return toString
      */
     @Override
     public String toString() {
